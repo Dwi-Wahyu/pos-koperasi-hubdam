@@ -6,7 +6,7 @@ export default function ProdukPage({}) {
       <LandingTopbar />
 
       <div className="pt-[7.2rem] container mx-auto">
-        <h1>Produk Page</h1>
+        <h1>Pre Order Page</h1>
         <p>This is the Produk page content.</p>
       </div>
     </div>

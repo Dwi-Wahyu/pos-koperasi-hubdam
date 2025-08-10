@@ -1,22 +1,21 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
+import { KategoriSection } from "./_components/section/kategori-section";
+import { HeroSection } from "./_components/section/hero-section";
+import { LandingTopbar } from "./_components/landing-topbar";
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const topbarMenu = [];
+
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <Card>
-        <CardHeader className="text-center">
-          <h1 className="text-2xl font-bold">Koperasi Hubdam</h1>
-          <p className="text-sm text-gray-500">
-            Aplikasi Point Of Sale untuk Koperasi Hubdam
-          </p>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col items-center">
-            <p className="text-lg">Selamat datang di aplikasi kami!</p>
-          </div>
-        </CardContent>
-      </Card>
+    <div>
+      <LandingTopbar />
+
+      <HeroSection />
+
+      <div className="container mx-auto my-10">
+        <KategoriSection />
+      </div>
     </div>
   );
 }

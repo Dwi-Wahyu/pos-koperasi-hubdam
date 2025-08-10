@@ -24,6 +24,8 @@ secret.md
 /public/uploads/produk/*
 !/public/uploads/produk/.gitkeep
 
+src/app/generated
+
 # next.js
 /.next/
 /out/
@@ -51,4 +53,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/app/generated/prisma
+app/generated/prisma
+next.config.ts
