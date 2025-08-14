@@ -13,9 +13,10 @@ export default async function LandingPage() {
 
       <HeroSection />
 
-      <div className="container mx-auto my-10">
+      {/* <div className="container mx-auto my-10 w-full">
+        <h1 className="text-xl md:text-2xl font-semibold mb-4">Produk Kami</h1>
         <KategoriSection />
-      </div>
+      </div> */}
     </div>
   );
 }

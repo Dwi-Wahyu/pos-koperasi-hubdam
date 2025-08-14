@@ -1,9 +1,8 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { getUserById } from "../manajemen-user/queries";
 import { auth } from "@/config/auth";
 import { ProfileEditForm } from "./profile-edit-form";
-import { getKesatuan } from "../kesatuan/queries";
+import { getUserById } from "../pengguna/[role]/queries";
 
 export default async function ProfilePage() {
   const session = await auth();

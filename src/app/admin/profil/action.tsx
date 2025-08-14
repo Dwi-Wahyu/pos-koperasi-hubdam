@@ -1,8 +1,8 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { UpdatePasswordSchemaType } from "@/validations/schemas/update-password";
 import { compareSync, hashSync } from "bcryptjs";
+import { UpdatePasswordSchemaType } from "./schema";
 
 export async function cekPasswordBenar(id: string, password: string) {
   const dataPengguna = await prisma.user.findUnique({

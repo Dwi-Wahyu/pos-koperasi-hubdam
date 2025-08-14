@@ -35,13 +35,11 @@ import { useForm } from "react-hook-form";
 
 import { Loader2 } from "lucide-react";
 import { cekPasswordBenar, updatePassword } from "./action";
-import {
-  updatePasswordSchema,
-  UpdatePasswordSchemaType,
-} from "@/validations/schemas/update-password";
+
 import { NotificationDialog } from "@/components/notification-dialog";
 import { PasswordInput } from "@/components/password-input";
 import { toast } from "sonner";
+import { updatePasswordSchema, UpdatePasswordSchemaType } from "./schema";
 
 export default function GantiPasswordDrawer({ id }: { id: string }) {
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);

@@ -9,11 +9,11 @@ dotenv.config();
 const prisma = new PrismaClient();
 
 async function main() {
-  await seedUsers(prisma);
-  await seedCategories(prisma);
+  // await seedUsers(prisma);
+  // await seedCategories(prisma);
   await seedProducts(prisma);
-  await seedInventories(prisma);
-  console.log("Seeding selesai!");
+  // await seedInventories(prisma);
+  // console.log("Seeding selesai!");
 }
 
 main()

@@ -2,31 +2,32 @@ import { PrismaClient } from "@/app/generated/prisma";
 
 export async function seedProducts(prisma: PrismaClient) {
   const categories = await prisma.category.findMany();
+  const inventories = await prisma.category.findMany();
 
-  // Contoh: Nasi Goreng (kategori makanan) dengan varian "Level Pedas" dan opsi "Sedang", "Pedas"
   const product = await prisma.product.create({
     data: {
-      name: "Nasi Goreng",
-      category: { connect: { id: categories[0].id } },
+      name: "Radio",
+      cost: 150000,
+      price: 200000,
+      categories: { connect: { id: categories[0].id } },
+      inventory: { connect: { id: inventories[0].id } },
       variants: {
         create: [
           {
-            name: "Level Pedas",
+            name: "Jenis",
             options: {
               create: [
                 {
-                  sku: "NASGOR-SEDANG",
-                  price: 15000,
-                  cost: 10000,
+                  sku: "RADIO-WIRELESS",
+                  additional_price: 150000,
                   stock: 50,
-                  option_value: "Sedang",
+                  option_value: "Wireless",
                 },
                 {
-                  sku: "NASGOR-PEDAS",
-                  price: 16000,
-                  cost: 11000,
+                  sku: "RADIO-ANALOG",
+                  additional_price: 100000,
                   stock: 50,
-                  option_value: "Pedas",
+                  option_value: "Analog",
                 },
               ],
             },
@@ -36,62 +37,15 @@ export async function seedProducts(prisma: PrismaClient) {
     },
   });
 
-  // Contoh: Teh Botol (kategori minuman) tanpa varian
   await prisma.product.create({
     data: {
-      name: "Teh Botol",
-      category: { connect: { id: categories[1].id } },
-      variants: {
-        create: [
-          {
-            name: "Kemasan",
-            options: {
-              create: [
-                {
-                  sku: "TEHBOTOL-REG",
-                  price: 5000,
-                  cost: 3000,
-                  stock: 200,
-                  option_value: "Reguler",
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  });
-
-  // Contoh: Pulpen (kategori alat tulis) dengan varian warna
-  await prisma.product.create({
-    data: {
-      name: "Pulpen",
-      category: { connect: { id: categories[2].id } },
-      variants: {
-        create: [
-          {
-            name: "Warna",
-            options: {
-              create: [
-                {
-                  sku: "PULPEN-BIRU",
-                  price: 3000,
-                  cost: 2000,
-                  stock: 150,
-                  option_value: "Biru",
-                },
-                {
-                  sku: "PULPEN-HITAM",
-                  price: 3000,
-                  cost: 2000,
-                  stock: 150,
-                  option_value: "Hitam",
-                },
-              ],
-            },
-          },
-        ],
-      },
+      name: "Beras",
+      cost: 150000,
+      price: 200000,
+      categories: { connect: { id: categories[1].id } },
+      inventory: { connect: { id: inventories[0].id } },
+      is_single_variant: true,
+      unit: "Liter",
     },
   });
 }

@@ -32,7 +32,7 @@ export function ConfirmationDialog({
   isLoading = false,
   confirmButtonText = "Konfirmasi",
   cancelButtonText = "Batal",
-  confirmButtonVariant = "secondary",
+  confirmButtonVariant = "destructive",
 }: ConfirmationDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>

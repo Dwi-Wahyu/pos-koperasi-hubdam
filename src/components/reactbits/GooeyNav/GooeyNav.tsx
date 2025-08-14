@@ -15,6 +15,7 @@ export interface GooeyNavProps {
   timeVariance?: number;
   colors?: number[];
   initialActiveIndex?: number;
+  orientation?: "vertical" | "horizontal";
 }
 
 const GooeyNav: React.FC<GooeyNavProps> = ({
@@ -26,6 +27,7 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
   timeVariance = 300,
   colors = [1, 2, 3, 1, 2, 3, 1, 4],
   initialActiveIndex = 0,
+  orientation = "horizontal",
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLUListElement>(null);
@@ -310,12 +312,14 @@ const GooeyNav: React.FC<GooeyNavProps> = ({
       </style>
       <div className="relative" ref={containerRef}>
         <nav
-          className="flex relative"
+          className={`flex relative flex-col`}
           style={{ transform: "translate3d(0,0,0.01px)" }}
         >
           <ul
             ref={navRef}
-            className="flex gap-8 list-none p-0 px-4 m-0 relative z-[3]"
+            className={`flex gap-4 list-none p-0 px-4 m-0 relative ${
+              orientation === "vertical" ? "flex-col" : "flex-row"
+            } z-[3]`}
             style={{
               color: "white",
               textShadow: "0 1px 1px hsl(205deg 30% 10% / 0.2)",

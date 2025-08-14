@@ -1,27 +1,13 @@
-perbaiki fungsi login menggunakan prisma admin
+- fix edit kategori
 
-perbaiki fungsi hapus prajurit
+- fix edit gudang
 
-buat parameter tambahan untuk path upload pada storage service
+- pastikan storage_services support upload gambar dengan subdirektori lain selain avatar dan bisa juga file type lain
 
-fix breadcrumb pada create dan edit prajurit
+- fix tambah produk
 
-gunakan kembali createPrajurit untuk create user, buat role pada schema
+- fix seeding product dengan data faktual
 
-perbaiki fungsi create user dan edit user
+- fix produk jika single variant tambahkan field satuan pada model product dan gunakan perhitungan harga per satuan dikali jumlah
 
-terapkan refresh token dan access token pada login
-
-- buat halaman untuk seluruh not found resource (prajurit, berita, user, kesatuan) gunakan komponen yang telah dibuat
-
-- prune terlebih dahulu karena sudahka uninstall react-query
-
-- perbaiki mengapa ketika mengubah avatar menambahkan tanda '/' diawal /uploads/avatar/78842536292567_2025-07-22T17-30-31-889Z_bb580ae0-51fe-4afb-b366-8852702c109b.jpg
-
-- periksa yang mana benar pada penerapan aplikasi apakah menggunakan '/' ketika memanggil gambar atau tidak
-
-- buat fungsi untuk input data garjas
-
-- fix fungsi endpoint hitung garjas gunakan juga nilai renang
-
-- fix import pada form penilaian, gunakan relative imports
+- fix card product simplify hanya menggunakan card seminimal mungkin

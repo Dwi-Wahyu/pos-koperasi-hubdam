@@ -1,7 +1,7 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/app/_components/sidebar/app-sidebar";
 import { BreadCrumbs } from "@/components/breadcrumb";
 import TopbarAvatar from "@/components/topbar-avatar";
+import { AdminSidebar } from "./sidebar/admin-sidebar";
 
 export default function ClientAdminLayout({
   children,
@@ -17,7 +17,7 @@ export default function ClientAdminLayout({
         } as React.CSSProperties
       }
     >
-      <AppSidebar />
+      <AdminSidebar />
       <main className=" w-full">
         <div className="flex p-3 px-4 border-b-[1px] border-b-sidebar justify-between items-center w-full">
           <BreadCrumbs />
@@ -25,7 +25,7 @@ export default function ClientAdminLayout({
           <TopbarAvatar />
         </div>
 
-        <div className="p-4">{children}</div>
+        <div className="p-4 md:p-7">{children}</div>
       </main>
     </SidebarProvider>
   );

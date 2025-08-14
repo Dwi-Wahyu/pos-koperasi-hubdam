@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ["192.168.1.6"],
+    domains: ["192.168.1.10"],
   },
   experimental: {
     serverActions: {

@@ -20,15 +20,18 @@ import {
 } from "@tabler/icons-react";
 import IconKesatuan from "./icons/kesatuan";
 import IconPrajurit from "./icons/prajurit";
+import { usePathname } from "next/navigation";
 
 export function BreadCrumbs() {
   const { linkActive } = useSidebar();
 
   const breadcrumbs = generateBreadcrumbs(linkActive);
 
+  const pathname = usePathname();
+
   return (
     <div className="flex items-center gap-2">
-      <SidebarTrigger />
+      {pathname === "/admin/transaksi/input" ? null : <SidebarTrigger />}
 
       <Breadcrumb>
         <BreadcrumbList className="h-8 bg-sidebar gap-2 rounded-md border px-3 text-sm">
