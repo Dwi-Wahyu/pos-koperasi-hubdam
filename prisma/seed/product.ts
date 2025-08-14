@@ -10,7 +10,6 @@ export async function seedProducts(prisma: PrismaClient) {
       cost: 150000,
       price: 200000,
       categories: { connect: { id: categories[0].id } },
-      inventory: { connect: { id: inventories[0].id } },
       variants: {
         create: [
           {
@@ -43,7 +42,6 @@ export async function seedProducts(prisma: PrismaClient) {
       cost: 150000,
       price: 200000,
       categories: { connect: { id: categories[1].id } },
-      inventory: { connect: { id: inventories[0].id } },
       is_single_variant: true,
       unit: "Liter",
       stock: 500,
