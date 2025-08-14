@@ -46,6 +46,7 @@ export async function seedProducts(prisma: PrismaClient) {
       inventory: { connect: { id: inventories[0].id } },
       is_single_variant: true,
       unit: "Liter",
+      stock: 500,
     },
   });
 }
