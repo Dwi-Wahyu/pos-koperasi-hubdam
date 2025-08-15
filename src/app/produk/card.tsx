@@ -7,6 +7,7 @@ import { EyeIcon, ImageOff, ShoppingBasket } from "lucide-react";
 import { getProductDataForCashier } from "../input-transaksi/queries";
 import { getAllCategoryIncludingProducts } from "../admin/produk/queries";
 import Link from "next/link";
+import Image from "next/image";
 
 type ProductTypeFromCategory = Awaited<
   ReturnType<typeof getProductDataForCashier>
@@ -27,10 +28,12 @@ export function ProductCardForList({
 
           {product.image ? (
             <div className="w-full h-[200px] overflow-hidden rounded-lg">
-              <img
+              <Image
                 src={adminUrl + product.image}
                 alt="product"
                 className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
+                width={500}
+                height={200}
               />
             </div>
           ) : (

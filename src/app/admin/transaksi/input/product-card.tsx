@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { transaction_item } from "@/app/generated/prisma";
+import Image from "next/image";
 
 export type ProductType = Awaited<
   ReturnType<typeof getProductDataForCashier>
@@ -48,10 +49,12 @@ export function CashierProductCard({
         <CardTitle>{product.name}</CardTitle>
 
         {product.image ? (
-          <img
+          <Image
             src={adminUrl + product.image}
             alt="product"
             className="w-75 rounded-lg"
+            width={300}
+            height={300}
           />
         ) : (
           <ImageOff />
