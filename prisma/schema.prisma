@@ -110,7 +110,7 @@ model product {
 model product_variant {
   id         Int              @id @default(autoincrement())
   product_id Int
-  name       String           @unique
+  name       String
   product    product          @relation(onDelete: Cascade, fields: [product_id], references: [id])
   options    product_option[]
 
@@ -118,12 +118,13 @@ model product_variant {
   updated_at DateTime  @updatedAt
   deleted_at DateTime?
 
+  @@unique([product_id, name])
   @@index([product_id], map: "product_variant_product_id_fkey")
 }
 
 model product_option {
   id                Int                @id @default(autoincrement())
-  sku               String             @unique
+  sku               String
   image             String?
   additional_price  Int
   stock             Int                @default(0)

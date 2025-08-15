@@ -16,6 +16,7 @@ import { CashierProductCard, ProductType } from "./product-card";
 import { parseAsArrayOf, parseAsInteger, useQueryState } from "nuqs";
 import { useState } from "react";
 import { getAllCategory } from "../admin/kategori/queries";
+import { product_variant } from "../generated/prisma";
 
 export type CategoriesType = {
   id: number;
@@ -30,6 +31,7 @@ export type CartItemType = {
   qty: number;
   image?: string;
   unit?: string;
+  variants: product_variant[];
 };
 
 export function InputTransaksiPageClient({
@@ -82,6 +84,7 @@ export function InputTransaksiPageClient({
           qty: qty,
           image: product.image ?? "",
           unit: product.unit ?? "",
+          variants: product.variants,
         },
       ]);
     }
@@ -147,6 +150,12 @@ export function InputTransaksiPageClient({
                   <p className="text-sm text-muted-foreground">
                     {product.qty} x {product.price}
                   </p>
+
+                  {!product.is_single_variant && (
+                    <div>
+                      <h1>bukan single</h1>
+                    </div>
+                  )}
                 </div>
                 <span className="font-bold">
                   Rp {product.qty * product.price}

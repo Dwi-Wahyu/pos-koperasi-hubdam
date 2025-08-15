@@ -13,11 +13,9 @@ export async function getProductDataForCashier(
   };
 
   if (input.categories.length) {
-    whereClause = {
-      categories: {
-        some: {
-          id: { in: input.categories },
-        },
+    whereClause["categories"] = {
+      some: {
+        id: { in: input.categories },
       },
     };
   }
@@ -38,6 +36,11 @@ export async function getProductDataForCashier(
         select: {
           id: true,
           name: true,
+        },
+      },
+      variants: {
+        include: {
+          options: true,
         },
       },
       inventory: {

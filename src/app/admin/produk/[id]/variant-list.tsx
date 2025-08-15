@@ -206,29 +206,6 @@ export function ProductVariantList({
                             <TooltipTrigger asChild>
                               <Button asChild variant="ghost" size={"icon"}>
                                 <Link
-                                  href={`/admin/produk/${data.id}/tambah-pilihan-varian/${variant.id}`}
-                                >
-                                  {option.image ? (
-                                    <ImageUpIcon />
-                                  ) : (
-                                    <ImagePlusIcon />
-                                  )}
-                                </Link>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent side="bottom">
-                              {option.image ? (
-                                <p>Update Gambar</p>
-                              ) : (
-                                <p>Tambahkan Gambar</p>
-                              )}
-                            </TooltipContent>
-                          </Tooltip>
-
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button asChild variant="ghost" size={"icon"}>
-                                <Link
                                   href={`/admin/produk/${data.id}/edit-pilihan-varian/${variant.id}`}
                                 >
                                   <PenSquare />
