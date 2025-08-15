@@ -5,16 +5,24 @@ import { InputUserSchemaType } from "./schema";
 import { errorResponse, successResponse } from "@/helper/action-helpers";
 import { PrismaClientKnownRequestError } from "../generated/prisma/runtime/library";
 import { ServerActionReturn } from "@/types/server-action";
+import { hashSync } from "bcryptjs";
 
 export async function createCustomer(
   payload: InputUserSchemaType
 ): Promise<ServerActionReturn<void>> {
   try {
+    const { password, ...rest } = payload;
+
+    const hashedPassword = hashSync(password, 10);
+
     const create = await prisma.user.create({
-      data: payload,
+      data: {
+        password: hashedPassword,
+        ...rest,
+      },
     });
 
-    return successResponse(undefined, "Produk Berhasil Ditambahkan");
+    return successResponse(undefined, "Kustomer Berhasil Ditambahkan");
   } catch (e: any) {
     console.error("Error creating customer:", e);
 
@@ -24,7 +32,7 @@ export async function createCustomer(
           (e.meta?.target as string[])?.join(", ") || "Unknown field";
         if (targetField.includes("name")) {
           return errorResponse(
-            "Nama Produk sudah digunakan. ",
+            "Nama Kustomer sudah digunakan. ",
             "DUPLICATE_NAME"
           );
         }

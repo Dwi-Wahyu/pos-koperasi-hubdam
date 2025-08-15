@@ -21,9 +21,13 @@ import { createCustomer } from "./action";
 import { InputUserSchema, InputUserSchemaType } from "./schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
+import { NotificationDialog } from "@/components/notification-dialog";
 
 export default function RegisterPage() {
   const router = useRouter();
+
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+  const [isErrorOpen, setIsErrorOpen] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const form = useForm<InputUserSchemaType>({
@@ -41,11 +45,34 @@ export default function RegisterPage() {
 
     const action = await createCustomer(payload);
 
+    if (action.success) {
+      setIsSuccessOpen(true);
+    } else {
+      setIsErrorOpen(true);
+    }
+
     setLoading(false);
   };
 
   return (
     <div className="w-full relative min-h-svh flex justify-center items-center bg-[url('/bg-login.png')] bg-center bg-cover">
+      <NotificationDialog
+        isOpen={isSuccessOpen}
+        onClose={() => setIsSuccessOpen(false)}
+        title="Register Berhasil!"
+        message="Silahkan Login."
+        variant="success"
+      />
+
+      {/* Dialog Gagal */}
+      <NotificationDialog
+        isOpen={isErrorOpen}
+        onClose={() => setIsErrorOpen(false)}
+        title="Aksi Gagal!"
+        message="Terjadi kesalahan saat register. Silakan coba lagi."
+        variant="error"
+      />
+
       <Image
         className="absolute left-5 top-5"
         src="/logo-tni-ad.png"
@@ -53,6 +80,7 @@ export default function RegisterPage() {
         width={40}
         height={40}
       />
+
       <Card className="md:w-lg relative">
         <CardContent className="">
           <Form {...form}>

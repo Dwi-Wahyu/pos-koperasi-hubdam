@@ -3,9 +3,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardTitle, CardContent } from "@/components/ui/card";
-import { EyeIcon, ImageOff, ShoppingBasket } from "lucide-react";
+import { ImageOff } from "lucide-react";
 import { getProductDataForCashier } from "../input-transaksi/queries";
-import { getAllCategoryIncludingProducts } from "../admin/produk/queries";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -27,7 +26,7 @@ export function ProductCardForList({
           <CardTitle>{product.name}</CardTitle>
 
           {product.image ? (
-            <div className="w-full h-[200px] overflow-hidden rounded-lg">
+            <div className="w-full overflow-hidden rounded-lg">
               <Image
                 src={adminUrl + product.image}
                 alt="product"
