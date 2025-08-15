@@ -17,7 +17,7 @@ export function ProductCardForList({
 }: {
   product: ProductTypeFromCategory;
 }) {
-  const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL;
+  const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL ?? "http://localhost:3000";
 
   return (
     <Link href={"/produk/" + product.id}>
@@ -27,7 +27,7 @@ export function ProductCardForList({
 
           {product.image ? (
             <div className="w-full overflow-hidden rounded-lg">
-              <Image
+              <img
                 src={adminUrl + product.image}
                 alt="product"
                 className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"

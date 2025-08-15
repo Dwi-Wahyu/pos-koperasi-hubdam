@@ -153,12 +153,18 @@ function MultiVariantProduct({ product }: { product: ProductType }) {
         <div className="flex-2/3 p-5 border rounded-lg">
           {displayData.image ? (
             <div className="w-full h-fit overflow-hidden rounded-lg">
-              <Image
+              {/* <Image
                 src={adminUrl + displayData.image}
                 alt="product"
                 className="w-full max-h-96 h-full rounded-lg object-contain transition-transform duration-300 ease-in-out group-hover:scale-110"
                 width={500}
                 height={500}
+              /> */}
+
+              <img
+                src={adminUrl + product.image}
+                alt="product"
+                className="w-full  h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
               />
             </div>
           ) : (
