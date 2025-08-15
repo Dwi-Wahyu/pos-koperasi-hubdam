@@ -13,13 +13,13 @@ type ProductTypeFromCategory = Awaited<
   ReturnType<typeof getProductDataForCashier>
 >["data"][number];
 
-const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL;
-
 export function ProductCardForList({
   product,
 }: {
   product: ProductTypeFromCategory;
 }) {
+  const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL;
+
   return (
     <Link href={"/produk/" + product.id}>
       <Card className="group">
