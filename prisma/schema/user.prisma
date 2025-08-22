@@ -1,0 +1,26 @@
+model user {
+    id       String    @id @default(uuid())
+    name     String
+    email    String    @unique
+    password String
+    role     user_role
+
+    audit       audit[]
+    preorder    preorder[]
+    transaction transaction[]
+
+    message      message[]
+    conversation participant[]
+
+    reviews review[]
+
+    created_at DateTime  @default(now())
+    updated_at DateTime  @updatedAt
+    deleted_at DateTime?
+
+    avatar     String?
+    last_login DateTime?
+
+    shops        shop[]
+    distributors distributor[]
+}

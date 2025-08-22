@@ -18,7 +18,7 @@ export async function seedUsers(prisma: PrismaClient) {
         name: "Admin 1",
         email: adminEmail,
         password: await hashPassword(adminPass),
-        role: user_role.ADMIN,
+        role: user_role.SUPERADMIN,
       },
       {
         name: "Kasir 1",

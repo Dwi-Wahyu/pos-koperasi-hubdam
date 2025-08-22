@@ -1,0 +1,88 @@
+model preorder {
+    id       Int             @id @default(autoincrement())
+    quantity Int
+    status   preorder_status @default(PENDING)
+
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+
+    product_option_id Int
+    product_option    product_option @relation(onDelete: Cascade, fields: [product_option_id], references: [id])
+
+    customer_id String
+    customer    user   @relation(onDelete: Cascade, fields: [customer_id], references: [id])
+
+    @@index([customer_id], map: "preorder_customer_id_fkey")
+    @@index([product_option_id], map: "preorder_product_option_id_fkey")
+}
+
+model transaction {
+    id               Int                @id @default(autoincrement())
+    total            Int
+    status           transaction_status @default(PAID)
+    customer_id      String?
+    customer         user?              @relation(onDelete: SetNull, fields: [customer_id], references: [id])
+    transaction_item transaction_item[]
+
+    reviews review[]
+
+    created_at DateTime  @default(now())
+    updated_at DateTime  @updatedAt
+    deleted_at DateTime?
+
+    @@index([customer_id], map: "transaction_customer_id_fkey")
+}
+
+model transaction_item {
+    id Int @id @default(autoincrement())
+
+    quantity Int
+    price    Int
+
+    product    product? @relation(fields: [product_id], references: [id])
+    product_id Int?
+
+    product_option_id Int?
+    product_option    product_option? @relation(onDelete: Cascade, fields: [product_option_id], references: [id])
+
+    transaction_id Int
+    transaction    transaction @relation(onDelete: Cascade, fields: [transaction_id], references: [id])
+
+    @@index([product_id], map: "transaction_item_product_id_fkey")
+    @@index([product_option_id], map: "transaction_item_product_option_id_fkey")
+    @@index([transaction_id], map: "transaction_item_transaction_id_fkey")
+}
+
+model supplier_transaction {
+    id             Int                         @id @default(autoincrement())
+    total          Int
+    status         transaction_status          @default(UNPAID)
+    shop_id        Int
+    shop           shop                        @relation(fields: [shop_id], references: [id])
+    distributor_id Int
+    distributor    distributor                 @relation(fields: [distributor_id], references: [id])
+    items          supplier_transaction_item[]
+
+    created_at DateTime  @default(now())
+    updated_at DateTime  @updatedAt
+    deleted_at DateTime?
+
+    @@index([shop_id])
+    @@index([distributor_id])
+}
+
+model supplier_transaction_item {
+    id Int @id @default(autoincrement())
+
+    quantity Int
+    price    Int
+
+    product_id Int
+    product    product @relation(fields: [product_id], references: [id])
+
+    transaction_id Int
+    transaction    supplier_transaction @relation(fields: [transaction_id], references: [id])
+
+    @@index([product_id])
+    @@index([transaction_id])
+}

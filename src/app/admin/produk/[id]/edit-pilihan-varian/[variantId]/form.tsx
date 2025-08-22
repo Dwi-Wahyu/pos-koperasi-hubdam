@@ -36,7 +36,7 @@ import {
   getProductVariantOptionById,
 } from "../../queries";
 import { uploadGambar } from "../../../actions";
-import { updateProductVariantOption } from "./action";
+import { updateProductVariantOption } from "./actions";
 import { Textarea } from "@/components/ui/textarea";
 
 export function UpdatePilihanVarianProdukForm({

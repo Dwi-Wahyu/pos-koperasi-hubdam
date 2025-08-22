@@ -17,7 +17,7 @@ import { useRouter } from "nextjs-toploader/app";
 import { useState } from "react";
 import { PasswordInput } from "@/components/password-input";
 import Link from "next/link";
-import { createCustomer } from "./action";
+import { createCustomer } from "./actions";
 import { InputUserSchema, InputUserSchemaType } from "./schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
@@ -37,6 +37,7 @@ export default function RegisterPage() {
       email: "",
       password: "",
       role: "CUSTOMER",
+      avatar: "uploads/avatar/default-avatar.jpg",
     },
   });
 
@@ -89,7 +90,7 @@ export default function RegisterPage() {
                 <div className="flex flex-col items-center text-center">
                   <h1 className="text-2xl font-bold">Register</h1>
                   <p className="text-muted-foreground text-balance">
-                    Mendaftar Sebagai Kustomer Di Aplikasi
+                    Mendaftar Ke Aplikasi
                   </p>
                 </div>
                 <FormField

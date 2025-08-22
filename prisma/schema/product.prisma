@@ -1,0 +1,112 @@
+model product {
+    id                Int               @id @default(autoincrement())
+    name              String
+    image             String?
+    categories        category[]
+    inventory_id      Int?
+    inventory         inventory?        @relation(onDelete: SetNull, fields: [inventory_id], references: [id])
+    variants          product_variant[]
+    cost              Int
+    price             Int
+    unit              String? // pcs, liter, kg
+    stock             Int?
+    sku               String?
+    is_single_variant Boolean           @default(false)
+    description       String?           @db.Text
+
+    reviews review[]
+
+    total_rating Int @default(0)
+    rating_count Int @default(0)
+
+    transaction_items transaction_item[]
+
+    created_at DateTime  @default(now()) @map("created_at")
+    updated_at DateTime  @updatedAt @map("updated_at")
+    deleted_at DateTime?
+
+    distributor_id Int?
+    distributor    distributor? @relation(fields: [distributor_id], references: [id])
+
+    supplier_transaction_items supplier_transaction_item[]
+
+    discounts discount[]
+
+    @@index([inventory_id], map: "product_inventory_id_fkey")
+    @@index([distributor_id])
+}
+
+model discount {
+    id         Int      @id @default(autoincrement())
+    product    product? @relation(fields: [product_id], references: [id])
+    product_id Int?
+}
+
+model product_variant {
+    id         Int              @id @default(autoincrement())
+    product_id Int
+    name       String
+    product    product          @relation(onDelete: Cascade, fields: [product_id], references: [id])
+    options    product_option[]
+
+    created_at DateTime  @default(now())
+    updated_at DateTime  @updatedAt
+    deleted_at DateTime?
+
+    @@unique([product_id, name])
+    @@index([product_id], map: "product_variant_product_id_fkey")
+}
+
+model product_option {
+    id                Int                @id @default(autoincrement())
+    sku               String
+    image             String?
+    additional_price  Int
+    stock             Int                @default(0)
+    option_value      String // contoh: "L"
+    variant_id        Int
+    variant           product_variant    @relation(onDelete: Cascade, fields: [variant_id], references: [id])
+    transaction_items transaction_item[]
+    product_history   product_history[]
+    preorder          preorder[]
+    description       String?            @db.Text
+
+    created_at DateTime  @default(now())
+    updated_at DateTime  @updatedAt
+    deleted_at DateTime?
+
+    @@index([variant_id], map: "product_option_variant_id_fkey")
+}
+
+model product_history {
+    id                Int                         @id @default(autoincrement())
+    product_option_id Int
+    change_type       product_history_change_type @default(IN)
+    quantity_before   Int
+    quantity_after    Int
+    changed_at        DateTime                    @default(now())
+    product_option    product_option              @relation(onDelete: Cascade, fields: [product_option_id], references: [id])
+
+    @@index([product_option_id], map: "product_history_product_option_id_fkey")
+}
+
+model review {
+    id         Int     @id @default(autoincrement())
+    rating     Int
+    comment    String? @db.Text
+    product_id Int
+    product    product @relation(fields: [product_id], references: [id], onDelete: Cascade)
+    user_id    String
+    user       user    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    transaction_id Int?
+    transaction    transaction? @relation(fields: [transaction_id], references: [id], onDelete: SetNull)
+
+    created_at DateTime  @default(now())
+    updated_at DateTime  @updatedAt
+    deleted_at DateTime?
+
+    @@index([product_id])
+    @@index([user_id])
+    @@index([transaction_id])
+}

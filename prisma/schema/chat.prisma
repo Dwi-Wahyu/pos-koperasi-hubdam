@@ -1,0 +1,65 @@
+model conversation {
+    id String @id @default(uuid())
+
+    isGroup Boolean @default(false)
+    name    String?
+
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+
+    participants participant[]
+    messages     message[]
+}
+
+model participant {
+    id String @id @default(uuid())
+
+    user_id String
+    user    user   @relation(fields: [user_id], references: [id])
+
+    conversation_id String
+    conversation    conversation @relation(fields: [conversation_id], references: [id])
+
+    creaetd_at DateTime @default(now())
+
+    has_read Boolean @default(true)
+
+    @@unique([user_id, conversation_id])
+    @@index([conversation_id])
+    @@index([user_id])
+}
+
+model message {
+    id String @id @default(uuid())
+
+    text String?
+
+    sender_id String
+    sender    user   @relation(fields: [sender_id], references: [id])
+
+    conversation_id String
+    conversation    conversation @relation(fields: [conversation_id], references: [id])
+
+    created_at DateTime @default(now())
+
+    read_by String?
+
+    isEdited    Boolean @default(false)
+    repliedToId String?
+
+    attachments message_attachment[]
+
+    @@index([conversation_id, created_at])
+    @@index([sender_id])
+}
+
+model message_attachment {
+    id        String @id @default(uuid())
+    url       String
+    file_type String // 'image', 'video', 'pdf'
+    file_name String
+    file_size Int
+
+    message_id String
+    message    message @relation(fields: [message_id], references: [id])
+}

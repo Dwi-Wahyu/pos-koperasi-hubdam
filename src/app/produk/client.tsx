@@ -95,7 +95,9 @@ export function ProductListPageClient({
         </div>
       ) : (
         <div className="flex justify-center md:flex-row flex-col mt-24 items-center gap-4">
-          <h1 className="text-2xl font-semibold">Produk Kosong</h1>
+          <h1 className="text-2xl font-semibold md:hidden block">
+            Produk Kosong
+          </h1>
           <PackageX className="w-14 h-14" />
           <div>
             <h1 className="text-2xl font-semibold hidden md:block">

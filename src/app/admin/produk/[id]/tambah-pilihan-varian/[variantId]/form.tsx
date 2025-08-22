@@ -33,7 +33,7 @@ import {
 } from "./schema";
 import { getProductVariantById } from "../../queries";
 import { uploadGambar } from "../../../actions";
-import { createProductVariantOption } from "./action";
+import { createProductVariantOption } from "./actions";
 import { Textarea } from "@/components/ui/textarea";
 
 export function TambahPilihanVarianProdukForm({

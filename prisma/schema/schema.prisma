@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../src/app/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model audit {
+  id         Int      @id @default(autoincrement())
+  action     String
+  action_url String?
+  ip_address String?
+  created_at DateTime @default(now())
+  user_id    String
+  user       user     @relation(fields: [user_id], references: [id])
+
+  @@index([user_id], map: "audit_user_id_fkey")
+}
+
+model setting {
+  id    Int    @id @default(autoincrement())
+  key   String @unique
+  value String
+}
+
+enum product_history_change_type {
+  IN
+  OUT
+  ADJUSTMENT
+}
+
+enum transaction_status {
+  PAID
+  UNPAID
+  CANCELLED
+}
+
+enum preorder_status {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum user_role {
+  SUPERADMIN
+  SHOP_OWNER
+  CASHIER
+  CUSTOMER
+  DISTRIBUTOR
+}

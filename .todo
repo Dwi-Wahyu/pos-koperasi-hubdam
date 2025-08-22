@@ -11,3 +11,5 @@
 - fix produk jika single variant tambahkan field satuan pada model product dan gunakan perhitungan harga per satuan dikali jumlah
 
 - fix card product simplify hanya menggunakan card seminimal mungkin
+
+- lengkapi model discount untuk product

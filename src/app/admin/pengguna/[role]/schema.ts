@@ -1,9 +1,11 @@
 import { InferType, number, object, string, array, boolean } from "yup";
 
 export const UserRole = {
-  ADMIN: "ADMIN",
-  CASHIER: "CASHIER",
+  SUPERADMIN: "SUPERADMIN",
+  SHOP_OWNER: "SHOP_OWNER",
   CUSTOMER: "CUSTOMER",
+  CASHIER: "CASHIER",
+  DISTRIBUTOR: "DISTRIBUTOR",
 } as const;
 
 export const InputUserSchema = object({

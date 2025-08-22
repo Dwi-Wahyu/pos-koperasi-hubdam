@@ -1,0 +1,30 @@
+enum distributor_status {
+    PENDING
+    ACTIVE
+    INACTIVE
+}
+
+model distributor {
+    id           Int                @id @default(autoincrement())
+    name         String
+    address      String
+    description  String?            @db.Text
+    logo         String?
+    status       distributor_status @default(PENDING)
+    phone_number String?
+    email        String?            @unique
+    is_verified  Boolean            @default(false)
+    tax_id       String?
+    banner       String?
+
+    owner_id              String
+    owner                 user                   @relation(fields: [owner_id], references: [id])
+    products              product[]
+    supplier_transactions supplier_transaction[]
+
+    created_at DateTime  @default(now())
+    updated_at DateTime  @updatedAt
+    deleted_at DateTime?
+
+    @@index([owner_id])
+}

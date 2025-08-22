@@ -6,10 +6,16 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:deploy": "prisma migrate deploy --schema=./prisma/schema/ --migrations=./prisma/migrations",
+    "db:migrate": "prisma migrate dev --schema=./prisma/schema/ --migrations=./prisma/migrations",
+    "db:generate": "prisma generate --schema=./prisma/schema/",
+    "db:push": "prisma db push --schema=./prisma/schema/",
+    "db:pull": "prisma db pull --schema=./prisma/schema/",
+    "db:studio": "prisma studio --schema=./prisma/schema/"
   },
   "prisma": {
-    "seed": "tsx prisma/seed"
+    "schema": "./prisma/schema/"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

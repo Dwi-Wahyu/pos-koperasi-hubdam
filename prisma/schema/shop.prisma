@@ -1,0 +1,63 @@
+enum shop_status {
+    PENDING
+    ACTIVE
+    INACTIVE
+    REJECTED
+    SUSPENDED
+}
+
+model shop {
+    id           Int         @id @default(autoincrement())
+    name         String
+    address      String
+    description  String?     @db.Text
+    logo         String?
+    status       shop_status @default(PENDING)
+    phone_number String?
+    email        String?     @unique
+    is_verified  Boolean     @default(false)
+    tax_id       String?
+    banner       String?
+
+    owner_id              String
+    owner                 user                   @relation(fields: [owner_id], references: [id])
+    inventories           inventory[]
+    categories            category[]
+    supplier_transactions supplier_transaction[]
+    suspend_reason        String?
+
+    created_at DateTime  @default(now())
+    updated_at DateTime  @updatedAt
+    deleted_at DateTime?
+
+    @@index([owner_id])
+}
+
+model inventory {
+    id      Int       @id @default(autoincrement())
+    name    String
+    image   String?
+    product product[]
+
+    created_at DateTime  @default(now())
+    updated_at DateTime  @updatedAt
+    deleted_at DateTime?
+
+    shop_id Int?
+    shop    shop? @relation(fields: [shop_id], references: [id])
+
+    @@index([shop_id])
+}
+
+model category {
+    id      Int       @id @default(autoincrement())
+    name    String
+    image   String?
+    product product[]
+
+    created_at DateTime  @default(now())
+    updated_at DateTime  @updatedAt
+    deleted_at DateTime?
+    shop       shop?     @relation(fields: [shop_id], references: [id])
+    shop_id    Int?
+}
